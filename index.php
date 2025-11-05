@@ -17,8 +17,12 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      position: fixed;
+      z-index: -1;
+      width: 100%;
     }
     form {
+      
       background: #fff;
       padding: 30px;
       border-radius: 15px;
@@ -46,7 +50,7 @@
     textarea {
       resize: none;
     }
-    button {
+    .submit-btn {
       width: 100%;
       padding: 10px;
       background: #0984e3;
@@ -57,40 +61,75 @@
       font-size: 16px;
       cursor: pointer;
     }
-    button:hover {
+    .submit-btn:hover {
       background: #74b9ff;
+    }
+    main{
+      width: 100%;
+      background: #74b9ff;
+      overflow: auto;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+
+
+      position:absolute;
+      
+      z-index: 10;
+      padding-top:100px;
     }
   </style>
 </head>
 <body>
+  <main>
+    <form action="home.php" method="POST">
+      <header>
+        <h2>Project Submission Form</h2>
+      </header>
+      <label>First Name:</label>
+      <input type="text" name="fname" required>
 
-  <form action="home.php" method="POST">
-    <h2>Project Information Form</h2>
+      <label>Middle Name:</label>
+      <input type="text" name="mname">
 
-    <label for="title">Project Title:</label>
-    <input type="text" name="title" id="title" required>
+      <label>Last Name:</label>
+      <input type="text" name="lname" required>
 
-    <label for="category">Category:</label>
-    <select name="category" id="category" required>
-      <option value="">-- Select Category --</option>
-      <option value="Web Development">Web Development</option>
-      <option value="Mobile App">Mobile App</option>
-      <option value="Database System">Database System</option>
-      <option value="AI / Machine Learning">AI / Machine Learning</option>
-      <option value="Networking Project">Networking Project</option>
-    </select>
+      <label>Age:</label>
+      <select name="age" required>
+        <option value="">-- Select --</option>
+        <?php
+                for ($i = 1; $i <= 100; $i++) {
+                    echo "<option value='$i'>$i</option>";
+                }
+                ?>
+      </select>
 
-    <label for="members">Team Members (comma separated):</label>
-    <input type="text" name="members" id="members" placeholder="e.g. John, Maria, Alex">
+      
+      <div>
+        <label>Sex:</label>
+        <input type="radio" name="sex" value="Male" required> Male
+        <input type="radio" name="sex" value="Female" required> Female
+        <input type="radio" name="sex" value="Other" required> Other
+      </div>
+      
 
-    <label for="deadline">Project Deadline:</label>
-    <input type="date" name="deadline" id="deadline" required>
+      <label>Hobbies:</label>
+      <input type="checkbox" name="hobbies[]" value="Reading"> Reading
+      <input type="checkbox" name="hobbies[]" value="Cooking"> Cooking
+      <input type="checkbox" name="hobbies[]" value="Traveling"> Traveling
+      <input type="checkbox" name="hobbies[]" value="Gaming"> Gaming
+      <input type="checkbox" name="hobbies[]" value="Sports"> Sports
 
-    <label for="description">Project Description:</label>
-    <textarea name="description" id="description" rows="4" placeholder="Briefly describe your project..." required></textarea>
+      <label>Bio:</label>
+      <textarea name="bio" placeholder="Tell us something about yourself..."></textarea>
 
-    <button type="submit">Submit Project</button>
-  </form>
+      <input type="submit" class="submit-btn" value="Submit">
+    </form>
+  </main>
+
 
 </body>
 </html>

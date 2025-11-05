@@ -33,6 +33,19 @@
       font-weight: bold;
       color: #0984e3;
     }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #6c5ce7;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background-color: #a29bfe;
+    }
   </style>
 </head>
 <body>
@@ -41,22 +54,36 @@
     <h2>Project Details</h2>
 
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $title = $_POST['title'];
-        $category = $_POST['category'];
-        $members = $_POST['members'] ?: "No members listed";
-        $deadline = $_POST['deadline'];
-        $description = $_POST['description'];
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $fname = $_POST['fname'];
+        $mname = $_POST['mname'];
+        $lname = $_POST['lname'];
+        $age = $_POST['age'];
+        $sex = $_POST['sex'];
+        $hobbies = isset($_POST['hobbies']) ? $_POST['hobbies'] : [];
+        $bio = trim($_POST['bio']);
 
-        echo "<p><span class='highlight'>Project Title:</span> $title</p>";
-        echo "<p><span class='highlight'>Category:</span> $category</p>";
-        echo "<p><span class='highlight'>Team Members:</span> $members</p>";
-        echo "<p><span class='highlight'>Deadline:</span> $deadline</p>";
-        echo "<p><span class='highlight'>Description:</span> $description</p>";
-    } else {
-        echo "<p>No project data submitted.</p>";
-    }
+        echo "<p><strong>Your name is:</strong> $fname " . (!empty($mname) ? "$mname " : "") . "$lname</p>";
+        echo "<p><strong>Your age is:</strong> $age</p>";
+        echo "<p><strong>Your sex is:</strong> $sex</p>";
+
+        if (empty($hobbies)) {
+          echo "<p style='color:red;'>You have not chosen your hobby.</p>";
+        } else {
+          echo "<p><strong>Your hobbies are:</strong> " . implode(", ", $hobbies) . "</p>";
+        }
+
+        if (empty($bio)) {
+          echo "<p style='color:red;'>You have not set your bio.</p>";
+        } else {
+          echo "<p><strong>Your bio:</strong> $bio</p>";
+        }
+      } else {
+        echo "<p>No data submitted.</p>";
+      }
     ?>
+    <a href="index.php" class="btn">Submit Another Response</a>
+
   </div>
 
 </body>
